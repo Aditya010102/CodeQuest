@@ -1,12 +1,12 @@
-# Frontend
+# Angular
 frontend/node_modules/
-frontend/.angular/
-frontend/dist/
+frontend/node_modules.zip
+.angular/
 
-# Backend
+# Python
 backend/venv/
 backend/__pycache__/
-backend/*.pyc
+*.pyc
 
 # VS Code
 .vscode/
