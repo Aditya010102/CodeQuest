@@ -34,10 +34,11 @@ class Question(db.Model):
     )
 
     options = db.relationship(
-        "QuestionOption",
-        backref="question",
-        lazy=True,
-        cascade="all, delete-orphan"
+    "QuestionOption",
+    backref="question",
+    lazy=True,
+    cascade="all, delete-orphan",
+    order_by="QuestionOption.id"
     )
     subject = db.relationship(
 

@@ -1,1 +1,292 @@
-<p>questions works!</p>
+<div class="page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Questions Management</h1>
+
+            <p>Manage all quiz questions.</p>
+
+        </div>
+
+        <button class="add-btn" (click)="openAddModal()">
+
+            + Add Question
+
+        </button>
+
+
+    </div>
+    <div class="filters">
+
+        <input [(ngModel)]="searchText" (input)="onSearch()" placeholder="Search Question">
+
+        <select [(ngModel)]="selectedSubject" (change)="loadQuestions()">
+
+            <option [ngValue]="null">
+
+                All Subjects
+
+            </option>
+
+            @for(subject of subjects();track subject.id){
+
+            <option [ngValue]="subject.id">
+
+                {{subject.name}}
+
+            </option>
+
+            }
+
+        </select>
+
+    </div>
+
+    @if(loading()){
+
+    <div class="loading">
+
+        Loading Questions...
+
+    </div>
+    @if(!loading() && questions().length===0){
+
+    <div class="empty">
+
+        No Questions Found
+
+    </div>
+
+    }
+
+    }
+
+    @else{
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Question</th>
+
+                    <th>Subject</th>
+
+                    <th>Difficulty</th>
+
+                    <th>Marks</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for(question of questions(); track question.id){
+
+                <tr>
+
+                    <td>{{question.id}}</td>
+
+                    <td>{{question.question_text}}</td>
+
+                    <td>{{question.subject_name}}</td>
+
+                    <td>
+
+                        <span class="difficulty {{question.difficulty.toLowerCase()}}">
+
+                            {{question.difficulty}}
+
+                        </span>
+
+                    </td>
+
+                    <td>{{question.marks}}</td>
+
+                    <td class="actions-column">
+
+                        <button class="edit-btn" (click)="openEditModal(question)">
+
+                            Edit
+
+                        </button>
+
+                        <button class="delete" (click)="deleteQuestion(question)">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="pagination">
+
+        <button (click)="previousPage()" [disabled]="currentPage===1">
+
+            Previous
+
+        </button>
+
+        <span>
+
+            Page {{currentPage}}
+
+            of
+
+            {{totalPages}}
+
+        </span>
+
+        <button (click)="nextPage()" [disabled]="currentPage===totalPages">
+
+            Next
+
+        </button>
+
+    </div>
+    }
+
+</div>
+
+@if(showModal()){
+
+<div class="modal-overlay">
+
+    <div class="modal">
+
+        <h2>
+
+            {{ isEditMode() ? 'Edit Question' : 'Add Question' }}
+
+        </h2>
+
+        <form [formGroup]="questionForm">
+
+            <label>Subject</label>
+
+            <select formControlName="subject_id">
+
+                <option [ngValue]="null">
+
+                    Select Subject
+
+                </option>
+
+                @for(subject of subjects(); track subject.id){
+
+                <option [ngValue]="subject.id">
+
+                    {{subject.name}}
+
+                </option>
+
+                }
+
+            </select>
+
+            <label>Question</label>
+
+            <textarea rows="4" formControlName="question_text">
+
+            </textarea>
+
+            <label>Option A</label>
+
+            <input type="text" formControlName="optionA">
+
+            <label>Option B</label>
+
+            <input type="text" formControlName="optionB">
+
+            <label>Option C</label>
+
+            <input type="text" formControlName="optionC">
+
+            <label>Option D</label>
+
+            <input type="text" formControlName="optionD">
+
+            <label>Correct Answer</label>
+
+            <select formControlName="correctAnswer">
+
+                <option value="A">Option A</option>
+
+                <option value="B">Option B</option>
+
+                <option value="C">Option C</option>
+
+                <option value="D">Option D</option>
+
+            </select>
+
+            <label>Difficulty</label>
+
+            <select formControlName="difficulty">
+
+                <option value="Easy">
+
+                    Easy
+
+                </option>
+
+                <option value="Medium">
+
+                    Medium
+
+                </option>
+
+                <option value="Hard">
+
+                    Hard
+
+                </option>
+
+            </select>
+
+            <label>Marks</label>
+
+            <input type="number" min="1" formControlName="marks">
+
+            <div class="modal-actions">
+
+                <button type="button" class="cancel-btn" (click)="closeModal()">
+
+                    Cancel
+
+                </button>
+
+                <button type="button" class="save-btn" (click)="saveQuestion()">
+
+                    {{ isEditMode() ? 'Update' : 'Save' }}
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+}

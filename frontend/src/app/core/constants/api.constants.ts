@@ -30,5 +30,6 @@ export const API = {
 
     ADMIN_DASHBOARD: "/admin/dashboard",
     ADMIN_SUBJECTS: "/subjects/",
+    ADMIN_QUESTIONS: "/questions",
 
 }

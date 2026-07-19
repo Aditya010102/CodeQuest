@@ -21,7 +21,7 @@ question_bp.route(
 # -------------------------
 
 question_bp.route(
-    "/",
+    "",
     methods=["GET"]
 )(get_questions)
 
