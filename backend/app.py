@@ -72,18 +72,19 @@ app.register_blueprint(
     url_prefix="/api/leaderboard"
 
 )
-app.register_blueprint(
 
-    admin_dashboard_bp,
-
-    url_prefix="/api/admin/dashboard"
-
-)
 app.register_blueprint(
 
     favorite_bp,
 
     url_prefix="/api/favorites"
+
+)
+app.register_blueprint(
+
+    admin_dashboard_bp,
+
+    url_prefix="/api/admin/dashboard"
 
 )
 @app.route('/')

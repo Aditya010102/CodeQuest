@@ -1,0 +1,85 @@
+.sidebar {
+
+    width: 260px;
+
+    background: #1e293b;
+
+    color: white;
+
+    height: 100vh;
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.logo {
+
+    padding: 30px 20px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+
+}
+
+.logo h2 {
+
+    margin: 0;
+
+    color: #fff;
+
+}
+
+.logo span {
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+}
+
+nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-top: 25px;
+
+}
+
+nav a {
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    padding: 16px 24px;
+
+    transition: .3s;
+
+    font-weight: 500;
+
+}
+
+nav a:hover {
+
+    background: #334155;
+
+    color: white;
+
+}
+
+.active {
+
+    background: #2563eb;
+
+    color: white !important;
+
+}

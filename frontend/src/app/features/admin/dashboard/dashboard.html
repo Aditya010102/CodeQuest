@@ -1,0 +1,155 @@
+<div class="admin-dashboard">
+
+    <div class="page-header">
+
+        <h1>Admin Dashboard</h1>
+
+        <p>
+            Welcome to the CodeQuest Administration Panel.
+        </p>
+
+    </div>
+
+    @if(loading()){
+
+    <div class="loading">
+
+        Loading Dashboard...
+
+    </div>
+
+    }
+
+    @else{
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <h3>Total Users</h3>
+
+            <h2>{{dashboard()?.total_users}}</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Total Subjects</h3>
+
+            <h2>{{dashboard()?.total_subjects}}</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Total Questions</h3>
+
+            <h2>{{dashboard()?.total_questions}}</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Total Attempts</h3>
+
+            <h2>{{dashboard()?.total_attempts}}</h2>
+
+        </div>
+
+    </section>
+
+    <div class="tables">
+
+        <div class="table-card">
+
+            <h2>Recent Users</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Role</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for(user of dashboard()?.recent_users; track user.id){
+
+                    <tr>
+
+                        <td>{{user.full_name}}</td>
+
+                        <td>{{user.email}}</td>
+
+                        <td>{{user.role}}</td>
+
+                    </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-card">
+
+            <h2>Recent Quiz Attempts</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>User</th>
+
+                        <th>Subject</th>
+
+                        <th>Score</th>
+
+                        <th>%</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for(result of dashboard()?.recent_results; track $index){
+
+                    <tr>
+
+                        <td>{{result.user}}</td>
+
+                        <td>{{result.subject}}</td>
+
+                        <td>{{result.score}}</td>
+
+                        <td>{{result.percentage}}%</td>
+
+                    </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    }
+
+</div>

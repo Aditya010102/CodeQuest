@@ -1,0 +1,212 @@
+<div class="subjects-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Subjects Management</h1>
+
+            <p>Manage all quiz subjects.</p>
+
+        </div>
+
+        <button class="add-btn" (click)="openAddModal()">
+
+            + Add Subject
+
+        </button>
+
+    </div>
+
+    <div class="toolbar">
+
+        <input type="text" [(ngModel)]="searchText" (input)="onSearch()" placeholder="🔍 Search Subject...">
+
+    </div>
+
+    @if(loading()){
+
+    <div class="loading">
+
+        Loading Subjects...
+
+    </div>
+
+    }
+
+    @else{
+
+    @if(subjects().length===0){
+
+    <div class="empty">
+
+        No Subjects Found
+
+    </div>
+
+    }
+
+    @else{
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Subject</th>
+
+                    <th>Description</th>
+
+                    <th>Total Questions</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for(subject of subjects(); track subject.id){
+
+                <tr>
+
+                    <td>
+
+                        {{subject.id}}
+
+                    </td>
+
+                    <td>
+
+                        {{subject.name}}
+
+                    </td>
+
+                    <td>
+
+                        {{subject.description}}
+
+                    </td>
+
+                    <td>
+
+                        {{subject.total_questions}}
+
+                    </td>
+
+                    <td>
+
+                        <button class="edit-btn" (click)="openEditModal(subject)">
+
+                            Edit
+
+                        </button>
+                        <button class="delete-btn" (click)="deleteSubject(subject)">
+
+                            Delete
+
+                        </button>
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    }
+
+    }
+
+</div>
+
+@if(showModal()){
+
+<div class="modal-overlay">
+
+    <div class="modal">
+
+        <h2>
+
+            {{isEditMode() ? 'Edit Subject' : 'Add Subject'}}
+
+        </h2>
+
+        <form [formGroup]="subjectForm">
+
+            <label>
+
+                Subject Name
+
+            </label>
+
+            <input formControlName="name" type="text">
+
+            <label>
+
+                Description
+
+            </label>
+
+            <textarea rows="4" formControlName="description">
+
+</textarea>
+
+            <div class="actions">
+
+                <button type="button" class="cancel-btn" (click)="closeModal()">
+
+                    Cancel
+
+                </button>
+
+                <button type="button" class="save-btn" (click)="saveSubject()">
+
+                    {{isEditMode() ? 'Update' : 'Save'}}
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+}
+<div class="pagination">
+
+    <button (click)="previousPage()" [disabled]="currentPage===1">
+
+        Previous
+
+    </button>
+
+    <span>
+
+        Page {{currentPage}}
+
+        of
+
+        {{totalPages}}
+
+    </span>
+
+    <button (click)="nextPage()" [disabled]="currentPage===totalPages">
+
+        Next
+
+    </button>
+
+</div>

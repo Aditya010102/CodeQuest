@@ -26,4 +26,9 @@ export const API = {
 
     CHANGE_PASSWORD: "/profile/change-password",
 
+    // Admin routes
+
+    ADMIN_DASHBOARD: "/admin/dashboard",
+    ADMIN_SUBJECTS: "/subjects/",
+
 }

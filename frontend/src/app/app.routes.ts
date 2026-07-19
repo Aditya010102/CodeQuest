@@ -18,6 +18,13 @@ import { SubjectsComponent } from './features/subjects/subjects';
 import { FavoritesComponent } from './features/favorites/favorites';
 import { SettingsComponent } from './features/settings/settings';
 import { ChangePasswordComponent } from './features/change-password/change-password';
+import { AdminLayoutComponent } from './core/layouts/admin-layout/admin-layout';
+import { adminGuard } from './core/guards/admin-guard';
+import { AdminResultsComponent } from './features/admin/results/results';
+import { AdminUsersComponent } from './features/admin/users/users';
+import { AdminQuestionsComponent } from './features/admin/questions/questions';
+import { AdminSubjectsComponent } from './features/admin/subjects/subjects';
+import { AdminDashboardComponent } from './features/admin/dashboard/dashboard';
 
 export const routes: Routes = [
 
@@ -84,44 +91,38 @@ export const routes: Routes = [
         ]
     },
 
-    // {
-    //     path: 'admin',
-    //     component: AdminLayoutComponent,
-    //     canActivate: [authGuard, adminGuard],
-    //     children: [
+    {
+        path: 'admin',
+        component: AdminLayoutComponent,
+        canActivate: [authGuard, adminGuard],
+        children: [
 
-    //         {
-    //             path: '',
-    //             component: AdminDashboardComponent
-    //         },
+            {
+                path: '',
+                component: AdminDashboardComponent
+            },
 
-    //         // Next Sprint
-    //         {
-    //             path: 'subjects',
-    //             component: AdminSubjectsComponent
-    //         },
-    //         //
-    //         {
-    //             path: 'questions',
-    //             component: AdminQuestionsComponent
-    //         },
-    //         //
-    //         // {
-    //         //   path:'users',
-    //         //   component:UsersComponent
-    //         // },
-    //         //
-    //         // {
-    //         //   path:'results',
-    //         //   component:ResultsComponent
-    //         // }
+            {
+                path: 'subjects',
+                component: AdminSubjectsComponent
+            },
 
-    //     ]
-    // },
+            {
+                path: 'questions',
+                component: AdminQuestionsComponent
+            },
 
-    // {
-    //     path: '**',
-    //     redirectTo: ''
-    // }
+            {
+                path: 'users',
+                component: AdminUsersComponent
+            },
+
+            {
+                path: 'results',
+                component: AdminResultsComponent
+            }
+
+        ]
+    },
 
 ];
