@@ -1,0 +1,32 @@
+<div class="subjects-page">
+
+    <div class="header">
+
+        <h2>Subjects</h2>
+
+        <input type="text" placeholder="Search Subject..." (input)="onSearch($event)">
+
+    </div>
+
+    @if(loading()) {
+
+    <div class="empty">
+        Loading...
+    </div>
+
+    } @else {
+
+    <div class="subject-grid">
+
+        @for(subject of filteredSubjects(); track subject.id) {
+
+        <app-subject-card [subject]="subject">
+        </app-subject-card>
+
+        }
+
+    </div>
+
+    }
+
+</div>

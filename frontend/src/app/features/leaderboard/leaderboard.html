@@ -1,0 +1,77 @@
+<div class="leaderboard">
+
+    <h1>
+
+        Leaderboard
+
+    </h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Rank</th>
+
+                <th>Name</th>
+
+                <th>Subject</th>
+
+                <th>Score</th>
+
+                <th>Percentage</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @for(
+
+            item of leaders();
+
+            track $index){
+
+            <tr>
+
+                <td>
+
+                    {{$index+1}}
+
+                </td>
+
+                <td>
+
+                    {{item.user.name}}
+
+                </td>
+
+                <td>
+
+                    {{item.subject.name}}
+
+                </td>
+
+                <td>
+
+                    {{item.score}}
+
+                </td>
+
+                <td>
+
+                    {{item.percentage}}%
+
+                </td>
+
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

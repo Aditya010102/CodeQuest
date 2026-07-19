@@ -1,0 +1,66 @@
+<div class="profile-page">
+
+    @if(profile()){
+
+    <div class="profile-card">
+
+        <div class="avatar">
+
+            {{profile().full_name.charAt(0)}}
+
+        </div>
+
+        <h2>
+
+            My Profile
+
+        </h2>
+
+        <label>
+
+            Full Name
+
+        </label>
+
+        <input [(ngModel)]="profile().full_name" [disabled]="!editing">
+
+        <label>
+
+            Email
+
+        </label>
+
+        <input [value]="profile().email" disabled>
+
+        <label>
+
+            Role
+
+        </label>
+
+        <input [value]="profile().role" disabled>
+
+        @if(!editing){
+
+        <button (click)="editing=true">
+
+            Edit
+
+        </button>
+
+        }
+
+        @else{
+
+        <button (click)="save()">
+
+            Save
+
+        </button>
+
+        }
+
+    </div>
+
+    }
+</div>

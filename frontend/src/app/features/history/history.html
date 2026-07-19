@@ -1,0 +1,149 @@
+<div class="history-container">
+
+    <div class="history-header">
+
+        <h1>
+
+            Quiz History
+
+        </h1>
+
+        <input type="text" placeholder="Search Subject..." (input)="onSearch($event)">
+
+    </div>
+
+    @if(filteredHistory().length==0){
+
+    <div class="empty">
+
+        No Quiz History Found.
+
+    </div>
+
+    }
+
+    @else{
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Subject</th>
+
+                <th>Score</th>
+
+                <th>Correct</th>
+
+                <th>Wrong</th>
+
+                <th>Percentage</th>
+
+                <th>Date</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @for(item of pagedHistory(); track item.id){
+
+            <tr>
+
+                <td>
+
+                    {{item.id}}
+
+                </td>
+
+                <td>
+
+                    {{item.subject.name}}
+
+                </td>
+
+                <td>
+
+                    {{item.score}}
+
+                </td>
+
+                <td>
+
+                    {{item.correct_answers}}
+
+                </td>
+
+                <td>
+
+                    {{item.wrong_answers}}
+
+                </td>
+
+                <td>
+
+                    {{item.percentage}} %
+
+                </td>
+
+                <td>
+
+                    {{item.created_at | date:'dd/MM/yyyy hh:mm a'}}
+
+                </td>
+
+                <td>
+
+                    <button class="retake-btn" (click)="retakeQuiz(item.subject.id)">
+
+                        Retake
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+    <div class="pagination">
+
+        <button (click)="previousPage()" [disabled]="currentPage()==1">
+
+            Previous
+
+        </button>
+
+        <span>
+
+            Page
+
+            {{currentPage()}}
+
+            of
+
+            {{totalPages()}}
+
+        </span>
+
+        <button (click)="nextPage()" [disabled]="currentPage()==totalPages()">
+
+            Next
+
+        </button>
+
+    </div>
+
+    }
+
+</div>

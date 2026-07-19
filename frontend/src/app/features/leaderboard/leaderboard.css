@@ -1,0 +1,43 @@
+.leaderboard {
+
+    padding: 30px;
+
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: white;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+
+}
+
+th {
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 15px;
+
+}
+
+td {
+
+    padding: 15px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #ddd;
+
+}
+
+tbody tr:hover {
+
+    background: #f8fafc;
+
+}

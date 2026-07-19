@@ -1,0 +1,119 @@
+<div class="settings-page">
+
+    <div class="page-header">
+
+        <h1>⚙ Settings</h1>
+
+        <p>
+
+            Manage your account and application preferences.
+
+        </p>
+
+    </div>
+
+    <div class="settings-grid">
+
+        <!-- Profile -->
+
+        <div class="setting-card">
+
+            <div>
+
+                <h3>👤 Profile</h3>
+
+                <p>
+
+                    View and edit your profile information.
+
+                </p>
+
+            </div>
+
+            <button (click)="goProfile()">
+
+                Open
+
+            </button>
+
+        </div>
+
+        <!-- Security -->
+
+        <div class="setting-card">
+
+            <div>
+
+                <h3>🔒 Security</h3>
+
+                <p>
+
+                    Change your account password.
+
+                </p>
+
+            </div>
+
+            <button (click)="changePassword()">
+
+                Open
+
+            </button>
+
+        </div>
+
+        <!-- About -->
+
+        <div class="setting-card">
+
+            <div>
+
+                <h3>📄 About CodeQuest</h3>
+
+                <p>
+
+                    Version 1.0.0
+
+                </p>
+
+                <small>
+
+                    Angular • Flask • MySQL
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <!-- Support -->
+
+        <div class="setting-card">
+
+            <div>
+
+                <h3>📧 Support</h3>
+
+                <p>
+
+                    support@codequest.com
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="logout-section">
+
+        <button class="logout-btn" (click)="logout()">
+
+            🚪 Logout
+
+        </button>
+
+    </div>
+
+</div>

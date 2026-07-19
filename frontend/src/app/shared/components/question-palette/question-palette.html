@@ -1,0 +1,13 @@
+<div class="palette">
+
+    @for(item of answers();track $index){
+
+    <button [class.active]="current()==$index" [class.answered]="item!=null" (click)="questionSelected.emit($index)">
+
+        {{$index+1}}
+
+    </button>
+
+    }
+
+</div>

@@ -1,0 +1,99 @@
+<div class="favorites-page">
+
+    <h1>
+
+        ❤️ Favorite Questions
+
+    </h1>
+
+    @if(loading()){
+
+    <div class="loading">
+
+        Loading Favorites...
+
+    </div>
+
+    }
+
+    @else if(favorites().length){
+
+    <div class="favorite-grid">
+
+        @for(item of favorites();track item.id){
+
+        <div class="favorite-card">
+
+            <div class="top">
+
+                <h3>
+
+                    {{item.subject.name}}
+
+                </h3>
+
+                <span>
+
+                    {{item.difficulty}}
+
+                </span>
+
+            </div>
+
+            <p>
+
+                {{item.question}}
+
+            </p>
+
+            <div class="actions">
+
+                <button class="practice" (click)="practice(item.subject.id)">
+
+                    Practice
+
+                </button>
+
+                <button class="remove" (click)="remove(item.id)">
+
+                    Remove
+
+                </button>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+    }
+
+    @else{
+
+    <div class="empty">
+
+        <div class="icon">
+
+            ❤️
+
+        </div>
+
+        <h2>
+
+            No Favorite Questions
+
+        </h2>
+
+        <p>
+
+            Bookmark questions while solving quizzes.
+
+        </p>
+
+    </div>
+
+    }
+
+</div>

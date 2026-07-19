@@ -1,0 +1,39 @@
+.palette {
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 10px;
+
+}
+
+button {
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #ddd;
+
+    cursor: pointer;
+
+}
+
+.active {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+.answered {
+
+    background: #22c55e;
+
+    color: white;
+
+}

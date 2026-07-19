@@ -1,0 +1,171 @@
+<div class="dashboard">
+
+    <!-- Welcome -->
+
+    <section class="welcome">
+
+        <div>
+
+            <h1>
+                Welcome Back,
+                {{ user.full_name }} 👋
+            </h1>
+
+            <p>
+                Ready to improve your coding skills today?
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Statistics -->
+
+    <section class="statistics">
+
+        <app-stat-card title="Subjects" [value]="subjects().length.toString()">
+        </app-stat-card>
+
+        <app-stat-card title="Completed" [value]="dashboardData()?.total_quizzes?.toString() || '0'">
+        </app-stat-card>
+
+        <app-stat-card title="Average Score" [value]="dashboardData()
+            ? dashboardData()!.average_score.toFixed(0) + '%'
+            : '0%'">
+        </app-stat-card>
+
+        <app-stat-card title="Best Score" [value]="dashboardData()
+            ? dashboardData()!.highest_score.toFixed(0) + '%'
+            : '0%'">
+        </app-stat-card>
+
+    </section>
+
+    <!-- Recent History -->
+
+    <section class="history-card">
+
+        <div class="history-header">
+
+            <div>
+
+                <h2>Recent Quiz Attempts</h2>
+
+                <p>
+                    Track your latest quiz performance.
+                </p>
+
+            </div>
+
+        </div>
+
+        @if(dashboardData()?.recent_attempts?.length){
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Subject</th>
+
+                        <th>Score</th>
+
+                        <th>Percentage</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for(attempt of dashboardData()!.recent_attempts; track $index){
+
+                    <tr>
+
+                        <td>
+
+                            {{attempt.subject_name}}
+
+                        </td>
+
+                        <td>
+
+                            {{attempt.score}}
+
+                        </td>
+
+                        <td>
+
+                            {{attempt.percentage}}%
+
+                        </td>
+
+                        <td>
+
+                            <span class="status" [class.excellent]="attempt.percentage >= 80"
+                                [class.good]="attempt.percentage >= 50 && attempt.percentage < 80"
+                                [class.poor]="attempt.percentage < 50">
+
+                                {{attempt.percentage >= 80
+                                ? 'Excellent'
+                                : attempt.percentage >= 50
+                                ? 'Good'
+                                : 'Needs Practice'}}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            {{ attempt.date | date:'dd MMM yyyy, hh:mm a' }}
+                        </td>
+
+                    </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        }
+
+        @else{
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+
+                📚
+
+            </div>
+
+            <h3>
+
+                No Quiz Attempts Yet
+
+            </h3>
+
+            <p>
+
+                Start your first quiz from the Subjects page.
+
+            </p>
+
+        </div>
+
+        }
+
+    </section>
+
+</div>

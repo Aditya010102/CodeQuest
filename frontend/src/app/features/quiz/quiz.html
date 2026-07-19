@@ -1,0 +1,105 @@
+<div class="quiz-container">
+
+    @if (loading()) {
+
+    <div class="loading">
+        Loading Questions...
+    </div>
+
+    } @else {
+
+    <div class="quiz-card">
+
+        <div class="header">
+
+            <h2>
+                Question {{ currentQuestionIndex() + 1 }}
+                /
+                {{ questions().length }}
+            </h2>
+
+            <app-timer [minutes]="10" (timeUp)="submitQuiz()">
+            </app-timer>
+
+            @if (currentQuestion(); as question) {
+
+            <button class="bookmark-btn" (click)="toggleBookmark()"
+                [disabled]="bookmarkedQuestions().includes(currentQuestion()?.id ?? -1)">
+
+                {{
+
+                bookmarkedQuestions().includes(currentQuestion()?.id ?? -1)
+
+                ? '⭐ Bookmarked'
+
+                : '⭐ Bookmark'
+
+                }}
+
+            </button>
+            }
+
+        </div>
+
+        @if (currentQuestion(); as question) {
+
+        <div class="question">
+
+            {{ question.question_text }}
+
+        </div>
+
+        <div class="options">
+
+            @for (option of question.options; track option.id) {
+
+            <label class="option">
+
+                <input type="radio" [name]="'question-' + question.id" [checked]="selectedOption() === option.id"
+                    (change)="selectOption(option.id)">
+
+                <span>{{ option.text }}</span>
+
+            </label>
+
+            }
+
+        </div>
+
+        }
+
+        <div class="buttons">
+
+            <button type="button" (click)="previousQuestion()" [disabled]="currentQuestionIndex() === 0">
+
+                Previous
+
+            </button>
+
+            @if (currentQuestionIndex() < questions().length - 1) { <button type="button" (click)="nextQuestion()">
+
+                Next
+
+                </button>
+
+                } @else {
+
+                <button type="button" class="submit-btn" (click)="submitQuiz()">
+
+                    Submit Quiz
+
+                </button>
+
+                }
+
+        </div>
+
+    </div>
+
+    <app-question-palette [total]="questions().length" [current]="currentQuestionIndex()" [answers]="answers()"
+        (questionSelected)="goToQuestion($event)">
+    </app-question-palette>
+
+    }
+
+</div>
