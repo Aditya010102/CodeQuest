@@ -106,9 +106,9 @@ export class DashboardComponent implements OnInit {
 
       .subscribe({
 
-        next: (res) => {
+        next: (res: any) => {
 
-          this.subjects.set(res);
+          this.subjects.set(res.subjects);
 
           this.loading.set(false);
 

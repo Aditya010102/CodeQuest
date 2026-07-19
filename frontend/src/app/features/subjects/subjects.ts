@@ -53,10 +53,9 @@ export class SubjectsComponent implements OnInit {
     this.subjectService
       .getSubjects()
       .subscribe({
+        next: (response: any) => {
 
-        next: (response) => {
-
-          this.subjects.set(response);
+          this.subjects.set(response.subjects);
 
           this.loading.set(false);
 
