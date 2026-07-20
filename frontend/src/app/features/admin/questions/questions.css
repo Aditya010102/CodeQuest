@@ -425,3 +425,19 @@ tr:hover {
     color: #64748b;
 
 }
+
+.delete-btn {
+
+    background: #ef4444;
+
+    color: white;
+
+    border: none;
+
+    padding: 8px 14px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+}

@@ -26,6 +26,7 @@ from api_routes.profile_routes import profile_bp
 from api_routes.leaderboard_routes import leaderboard_bp
 from api_routes.favorite_routes import favorite_bp
 from api_routes.admin_dashboard_routes import admin_dashboard_bp
+from api_routes.user_routes import user_bp
 
 # Register Blueprint
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
@@ -85,6 +86,13 @@ app.register_blueprint(
     admin_dashboard_bp,
 
     url_prefix="/api/admin/dashboard"
+
+)
+app.register_blueprint(
+
+    user_bp,
+
+    url_prefix="/api/users"
 
 )
 @app.route('/')

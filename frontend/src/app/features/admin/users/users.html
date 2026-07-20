@@ -1,1 +1,260 @@
-<p>users works!</p>
+<div class="page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+
+                Users Management
+
+            </h1>
+
+            <p>
+
+                Manage all registered users.
+
+            </p>
+
+        </div>
+
+    </div>
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <h3>Total Users</h3>
+
+            <h2>{{totalUsers()}}</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Admins</h3>
+
+            <h2>{{totalAdmins()}}</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Active Users</h3>
+
+            <h2>{{activeUsers()}}</h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Inactive Users</h3>
+
+            <h2>{{inactiveUsers()}}</h2>
+
+        </div>
+
+    </div>
+    <div class="filters">
+
+        <input [(ngModel)]="searchText" (input)="onSearch()" placeholder="Search users...">
+
+        <select [(ngModel)]="selectedRole" (change)="loadUsers()">
+
+            <option value="">
+
+                All Roles
+
+            </option>
+
+            <option value="admin">
+
+                Admin
+
+            </option>
+
+            <option value="user">
+
+                User
+
+            </option>
+
+        </select>
+
+    </div>
+
+    @if(loading()){
+
+    <div class="loading">
+
+        Loading Users...
+
+    </div>
+
+    }
+
+    @else{
+
+    @if(users().length===0){
+
+    <div class="empty">
+
+        👤
+
+        <h3>No Users Found</h3>
+
+        <p>
+
+            Try another search.
+
+        </p>
+
+    </div>
+
+    }
+
+    @else{
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Role</th>
+
+                    <th>Status</th>
+
+                    <th>Joined</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for(user of users();track user.id){
+
+                <tr>
+
+                    <td>{{user.id}}</td>
+
+                    <td>{{user.full_name}}</td>
+
+                    <td>{{user.email}}</td>
+
+                    <td>
+
+                        <span class="role" [class.role-admin]="user.role==='admin'"
+                            [class.role-user]="user.role==='user'">
+
+                            {{user.role}}
+
+                        </span>
+                    </td>
+
+                    <td>
+
+                        @if(user.is_active){
+
+                        <span class="active">
+
+                            Active
+
+                        </span>
+
+                        }
+
+                        @else{
+
+                        <span class="inactive">
+
+                            Inactive
+
+                        </span>
+
+                        }
+
+                    </td>
+
+                    <td>{{user.created_at}}</td>
+
+                    <td>
+
+                        @if(user.id!==currentUser.id){
+
+                        <button class="edit-btn" (click)="changeRole(user)">
+
+                            Change Role
+
+                        </button>
+
+                        <button class="delete-btn" (click)="toggleStatus(user)">
+
+                            {{user.is_active ? 'Disable':'Enable'}}
+
+                        </button>
+
+                        }
+                        @else{
+
+                        <span class="self-badge">
+
+                            Current User
+
+                        </span>
+
+                        }
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    }
+
+    }
+
+    <div class="pagination">
+
+        <button (click)="previousPage()" [disabled]="currentPage===1">
+
+            Previous
+
+        </button>
+
+        <span>
+
+            Page {{currentPage}}
+
+            of
+
+            {{totalPages}}
+
+        </span>
+
+        <button (click)="nextPage()" [disabled]="currentPage===totalPages">
+
+            Next
+
+        </button>
+
+    </div>
+
+</div>
