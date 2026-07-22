@@ -1,4 +1,5 @@
 from flask import Blueprint
+from flask_jwt_extended import jwt_required
 
 from decorators.admin_required import admin_required
 
@@ -14,13 +15,15 @@ subject_bp = Blueprint(
     __name__
 )
 
+# Student + Admin
 subject_bp.route(
     "/",
     methods=["GET"]
 )(
-    admin_required(get_subjects)
+    jwt_required()(get_subjects)
 )
 
+# Admin only
 subject_bp.route(
     "/",
     methods=["POST"]
@@ -28,6 +31,7 @@ subject_bp.route(
     admin_required(create_subject)
 )
 
+# Admin only
 subject_bp.route(
     "/<int:subject_id>",
     methods=["PUT"]
@@ -35,6 +39,7 @@ subject_bp.route(
     admin_required(update_subject)
 )
 
+# Admin only
 subject_bp.route(
     "/<int:subject_id>",
     methods=["DELETE"]
