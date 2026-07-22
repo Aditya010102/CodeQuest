@@ -61,7 +61,7 @@ export const routes: Routes = [
                 component: FavoritesComponent
             },
             {
-                path: 'result',
+                path: 'result/:id',
                 component: ResultComponent
             },
 
@@ -98,7 +98,7 @@ export const routes: Routes = [
         children: [
 
             {
-                path: '',
+                path: 'dashboard',
                 component: AdminDashboardComponent
             },
 
@@ -123,6 +123,6 @@ export const routes: Routes = [
             }
 
         ]
-    },
+    }
 
 ];

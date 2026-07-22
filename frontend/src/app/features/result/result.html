@@ -1,3 +1,9 @@
+@if(loading()){
+
+<h2>Loading Result...</h2>
+
+}@else{
+
 <h1>
 
     Quiz Result
@@ -6,22 +12,21 @@
 
 <div class="result-page">
 
-
     <div class="card">
 
         <h2>
 
-            Score
+            {{ result()?.subject }}
 
         </h2>
 
         <h1>
 
-            {{result.score}}
+            {{ result()?.score }}
 
             /
 
-            {{result.totalQuestions}}
+            {{ result()?.total_questions }}
 
         </h1>
 
@@ -29,7 +34,7 @@
 
             Percentage
 
-            {{result.percentage}}%
+            {{ result()?.percentage }}%
 
         </p>
 
@@ -37,7 +42,7 @@
 
             Correct
 
-            {{result.correctAnswers}}
+            {{ result()?.correct_answers }}
 
         </p>
 
@@ -45,7 +50,7 @@
 
             Wrong
 
-            {{result.wrongAnswers}}
+            {{ result()?.wrong_answers }}
 
         </p>
 
@@ -53,7 +58,7 @@
 
             Attempted
 
-            {{result.attemptedQuestions}}
+            {{ result()?.attempted_questions }}
 
         </p>
 
@@ -66,3 +71,5 @@
     </div>
 
 </div>
+
+}

@@ -77,7 +77,7 @@ export class LoginComponent {
 
         if (response.user.role === 'admin') {
 
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin/dashboard']);
 
         } else {
 

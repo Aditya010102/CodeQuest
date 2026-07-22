@@ -189,12 +189,10 @@ export class QuizComponent implements OnInit {
 
         next: (response: any) => {
 
-          localStorage.setItem(
-            'quizResult',
-            JSON.stringify(response)
-          );
-
-          this.router.navigate(['/result']);
+          this.router.navigate([
+            '/result',
+            response.result_id
+          ]);
 
         },
 

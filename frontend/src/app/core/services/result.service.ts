@@ -33,4 +33,15 @@ export class ResultService {
 
   }
 
+  getResultById(id: number) {
+
+    return this.http.get(
+      environment.apiUrl +
+      API.RESULTS +
+      "/" +
+      id
+    );
+
+  }
+
 }

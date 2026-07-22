@@ -1,20 +1,52 @@
-<header>
+<header class="admin-navbar">
 
-    <div>
+    <div class="left">
 
-        <h2>Admin Dashboard</h2>
+        <h2 class="title">
+            Admin Dashboard
+        </h2>
 
     </div>
 
-    <div class="admin-info">
+    <div class="right">
 
-        <div class="avatar">
+        <div class="profile">
 
-            A
+            <div class="avatar">
+
+                {{ user?.full_name?.charAt(0).toUpperCase() }}
+
+            </div>
+
+            <div class="user-info">
+
+                <div class="name">
+
+                    {{ user?.full_name }}
+
+                </div>
+
+                <div class="role">
+
+                    Administrator
+
+                </div>
+
+            </div>
 
         </div>
 
-        <span>Administrator</span>
+        <button class="student-btn" routerLink="/dashboard">
+
+            🎓 Student Panel
+
+        </button>
+
+        <button class="logout-btn" (click)="logout()">
+
+            🚪 Logout
+
+        </button>
 
     </div>
 

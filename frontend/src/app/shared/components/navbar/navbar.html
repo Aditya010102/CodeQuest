@@ -2,47 +2,51 @@
 
     <div class="left-section">
 
-        <h2>
-
+        <h2 class="logo">
             CodeQuest
-
         </h2>
 
     </div>
 
-    <!-- <div class="center-section">
-
-        <input type="text" placeholder="Search Subjects...">
-
-    </div> -->
-
     <div class="right-section">
 
-        <button class="notification">
-
+        <button class="notification" title="Notifications">
             🔔
-
         </button>
 
         <div class="profile">
 
             <div class="avatar">
-
                 {{ username.charAt(0).toUpperCase() }}
+            </div>
+
+            <div class="user-info">
+
+                <div class="name">
+                    {{ username }}
+                </div>
+
+                <div class="role">
+                    {{ role === 'admin' ? 'Administrator' : 'Student' }}
+                </div>
 
             </div>
 
-            <span>
-
-                {{ username }}
-
-            </span>
-
         </div>
+
+        @if(role === 'admin'){
+
+        <button class="admin-btn" routerLink="/admin/dashboard">
+
+            👑 Admin Panel
+
+        </button>
+
+        }
 
         <button class="logout" (click)="logout()">
 
-            Logout
+            🚪 Logout
 
         </button>
 

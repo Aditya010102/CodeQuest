@@ -38,6 +38,7 @@ export class AuthService {
 
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('quizResult');
 
   }
 
