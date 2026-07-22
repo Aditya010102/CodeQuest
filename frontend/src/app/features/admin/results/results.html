@@ -1,1 +1,307 @@
-<p>results works!</p>
+<div class="page">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+
+                Results Management
+
+            </h1>
+
+            <p>
+
+                Manage all quiz attempts.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <h3>Total Results</h3>
+
+            <h2>
+
+                {{totalResults()}}
+
+            </h2>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>Average Score</h3>
+
+            <h2>
+
+                {{averagePercentage()}}%
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="filters">
+
+        <input [(ngModel)]="searchText" (input)="onSearch()" placeholder="Search user or subject...">
+
+    </div>
+
+    @if(loading()){
+
+    <div class="loading">
+
+        Loading Results...
+
+    </div>
+
+    }
+
+    @else{
+
+    @if(results().length===0){
+
+    <div class="empty">
+
+        No Results Found
+
+    </div>
+
+    }
+
+    @else{
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>User</th>
+
+                    <th>Subject</th>
+
+                    <th>Score</th>
+
+                    <th>Percentage</th>
+
+                    <th>Correct</th>
+
+                    <th>Wrong</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for(result of results();track result.id){
+
+                <tr>
+
+                    <td>
+
+                        {{result.user_name}}
+
+                    </td>
+
+                    <td>
+
+                        {{result.subject_name}}
+
+                    </td>
+
+                    <td>
+
+                        {{result.score}} /
+
+                        {{result.total_questions}}
+
+                    </td>
+
+                    <td>
+
+                        {{result.percentage}}%
+
+                    </td>
+
+                    <td>
+
+                        {{result.correct_answers}}
+
+                    </td>
+
+                    <td>
+
+                        {{result.wrong_answers}}
+
+                    </td>
+
+                    <td>
+
+                        {{result.created_at}}
+
+                    </td>
+
+                    <td>
+
+                        <button class="edit-btn" (click)="viewResult(result.id)">
+
+                            View
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    }
+
+    }
+
+    <div class="pagination">
+
+        <button (click)="previousPage()" [disabled]="currentPage===1">
+
+            Previous
+
+        </button>
+
+        <span>
+
+            Page {{currentPage}}
+
+            of
+
+            {{totalPages}}
+
+        </span>
+
+        <button (click)="nextPage()" [disabled]="currentPage===totalPages">
+
+            Next
+
+        </button>
+
+    </div>
+
+</div>
+
+@if(showModal()){
+
+<div class="modal-overlay">
+
+    <div class="modal">
+
+        <h2>
+
+            Attempt Details
+
+        </h2>
+
+        @if(selectedResult(); as result){
+
+        <div class="summary">
+
+            <p><strong>User:</strong> {{result.user}}</p>
+
+            <p><strong>Email:</strong> {{result.email}}</p>
+
+            <p><strong>Subject:</strong> {{result.subject}}</p>
+
+            <p><strong>Score:</strong> {{result.score}} / {{result.total_questions}}</p>
+
+            <p><strong>Percentage:</strong> {{result.percentage}}%</p>
+
+            <p><strong>Correct:</strong> {{result.correct_answers}}</p>
+
+            <p><strong>Wrong:</strong> {{result.wrong_answers}}</p>
+
+            <p><strong>Date:</strong> {{result.created_at}}</p>
+
+        </div>
+
+        <hr>
+
+        @for(answer of resultAnswers(); track $index){
+
+        <div class="question-card">
+
+            <h4>
+
+                Question {{$index + 1}}
+
+            </h4>
+
+            <p>
+
+                <strong>Question:</strong>
+
+                {{answer.question}}
+
+            </p>
+
+            <p>
+
+                <strong>Your Answer:</strong>
+
+                {{answer.selected_answer}}
+
+            </p>
+
+            <p>
+
+                <strong>Correct Answer:</strong>
+
+                {{answer.correct_answer}}
+
+            </p>
+
+            <span class="badge" [class.correct]="answer.is_correct" [class.wrong]="!answer.is_correct">
+
+                {{answer.is_correct ? 'Correct' : 'Wrong'}}
+
+            </span>
+
+        </div>
+
+        }
+
+        }
+
+        <div class="actions">
+
+            <button class="close-btn" (click)="closeModal()">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+}

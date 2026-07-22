@@ -165,91 +165,36 @@ export class QuizComponent implements OnInit {
   }
   submitQuiz() {
 
-    if (!confirm(
-
-      'Submit Quiz?'
-
-    )) {
-
+    if (!confirm('Submit Quiz?')) {
       return;
-
     }
-
-    const result =
-
-      this.quizService.calculateResult(
-
-        this.questions(),
-
-        this.answers() as number[]
-
-      );
-
-    const user =
-
-      JSON.parse(
-
-        localStorage.getItem(
-
-          'user'
-
-        )!
-
-      );
 
     const payload = {
 
-      user_id: user.id,
-
       subject_id: this.subjectId,
 
-      total_questions:
+      answers: this.questions().map((question, index) => ({
 
-        result.totalQuestions,
+        question_id: question.id,
 
-      attempted_questions:
+        selected_option_id: this.answers()[index]
 
-        result.attemptedQuestions,
-
-      correct_answers:
-
-        result.correctAnswers,
-
-      wrong_answers:
-
-        result.wrongAnswers,
-
-      score:
-
-        result.score,
-
-      percentage:
-
-        result.percentage
+      }))
 
     };
 
     this.resultService
-
       .saveResult(payload)
-
       .subscribe({
 
-        next: () => {
+        next: (response: any) => {
 
           localStorage.setItem(
-
             'quizResult',
-
-            JSON.stringify(result)
-
+            JSON.stringify(response)
           );
 
-          this.router.navigate(
-
-            ['/result']
-
-          );
+          this.router.navigate(['/result']);
 
         },
 
@@ -287,15 +232,7 @@ export class QuizComponent implements OnInit {
 
     }
 
-    const user = JSON.parse(
-
-      localStorage.getItem('user') || '{}'
-
-    );
-
     const payload = {
-
-      user_id: user.id,
 
       question_id: question.id
 

@@ -81,13 +81,7 @@ export class ProfileComponent implements OnInit {
   loadProfile() {
 
     this.service
-
-      .getProfile(
-
-        this.user.id
-
-      )
-
+      .getProfile()
       .subscribe({
 
         next: (res) => {
@@ -103,26 +97,18 @@ export class ProfileComponent implements OnInit {
   save() {
 
     this.service
-
       .updateProfile(
-
-        this.user.id,
-
         this.profile()
-
       )
-
       .subscribe({
 
         next: () => {
 
-          alert(
-
-            "Profile Updated"
-
-          );
+          alert("Profile Updated");
 
           this.editing = false;
+
+          this.loadProfile();
 
         }
 

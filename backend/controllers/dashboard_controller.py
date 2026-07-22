@@ -3,9 +3,12 @@ from sqlalchemy import func
 
 from models.result_model import QuizResult
 from extensions import db
+from flask_jwt_extended import get_jwt_identity
 
 
-def dashboard(user_id):
+def dashboard():
+
+    user_id = get_jwt_identity()
 
     total_quizzes = QuizResult.query.filter_by(
         user_id=user_id

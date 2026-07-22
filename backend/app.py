@@ -27,6 +27,7 @@ from api_routes.leaderboard_routes import leaderboard_bp
 from api_routes.favorite_routes import favorite_bp
 from api_routes.admin_dashboard_routes import admin_dashboard_bp
 from api_routes.user_routes import user_bp
+from api_routes.admin_analytics_routes import analytics_bp
 
 # Register Blueprint
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
@@ -89,12 +90,17 @@ app.register_blueprint(
 
 )
 app.register_blueprint(
+    analytics_bp,
+    url_prefix="/api/admin/analytics"
+)
+app.register_blueprint(
 
     user_bp,
 
     url_prefix="/api/users"
 
 )
+
 @app.route('/')
 def home():
     return {
@@ -110,8 +116,7 @@ if __name__ == '__main__':
         from models.question_option_model import QuestionOption
         from models.result_model import QuizResult
         from models.favorite_model import FavoriteQuestion
+        from models.result_answer_model import ResultAnswer
        
-
-        db.create_all()
 
     app.run(debug=True)

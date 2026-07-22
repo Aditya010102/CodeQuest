@@ -3,16 +3,17 @@ from flask import request, jsonify
 from extensions import db
 
 from models.favorite_model import FavoriteQuestion
+from flask_jwt_extended import get_jwt_identity
 
 
 def add_favorite():
 
     data = request.get_json()
 
-    user_id = data.get("user_id")
+    user_id = get_jwt_identity()
     question_id = data.get("question_id")
 
-    if not user_id or not question_id:
+    if not question_id:
 
         return jsonify({
             "message": "user_id and question_id are required."
@@ -59,7 +60,9 @@ def add_favorite():
     }), 201
 
 
-def get_user_favorites(user_id):
+def get_user_favorites():
+
+    user_id = get_jwt_identity()
 
     favorites = FavoriteQuestion.query.filter_by(
 

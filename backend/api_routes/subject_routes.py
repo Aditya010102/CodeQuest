@@ -1,5 +1,7 @@
 from flask import Blueprint
 
+from decorators.admin_required import admin_required
+
 from controllers.subject_controller import (
     get_subjects,
     create_subject,
@@ -15,19 +17,27 @@ subject_bp = Blueprint(
 subject_bp.route(
     "/",
     methods=["GET"]
-)(get_subjects)
+)(
+    admin_required(get_subjects)
+)
 
 subject_bp.route(
     "/",
     methods=["POST"]
-)(create_subject)
+)(
+    admin_required(create_subject)
+)
 
 subject_bp.route(
     "/<int:subject_id>",
     methods=["PUT"]
-)(update_subject)
+)(
+    admin_required(update_subject)
+)
 
 subject_bp.route(
     "/<int:subject_id>",
     methods=["DELETE"]
-)(delete_subject)
+)(
+    admin_required(delete_subject)
+)

@@ -1,42 +1,34 @@
 from flask import Blueprint
+from flask_jwt_extended import jwt_required
 
 from controllers.profile_controller import (
-
-    change_password,
     get_profile,
-
-    update_profile
-
+    update_profile,
+    change_password
 )
 
 profile_bp = Blueprint(
-
-"profile_bp",
-
-__name__
-
+    "profile_bp",
+    __name__
 )
 
 profile_bp.route(
-
-"/<int:user_id>",
-
-methods=["GET"]
-
-)(get_profile)
-
-profile_bp.route(
-
-"/<int:user_id>",
-
-methods=["PUT"]
-
-)(update_profile)
+    "",
+    methods=["GET"]
+)(
+    jwt_required()(get_profile)
+)
 
 profile_bp.route(
-
-    "/change-password/<int:user_id>",
-
+    "",
     methods=["PUT"]
+)(
+    jwt_required()(update_profile)
+)
 
-)(change_password)
+profile_bp.route(
+    "/change-password",
+    methods=["PUT"]
+)(
+    jwt_required()(change_password)
+)

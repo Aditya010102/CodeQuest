@@ -5,43 +5,44 @@ from extensions import db
 from models.user_model import User
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
+from flask_jwt_extended import get_jwt_identity
 
-def get_profile(user_id):
+def get_profile():
+
+    user_id = get_jwt_identity()
 
     user = User.query.get(user_id)
 
     if not user:
 
         return jsonify({
-
-            "message":"User not found"
-
-        }),404
+            "message": "User not found"
+        }), 404
 
     return jsonify({
 
-        "id":user.id,
+        "id": user.id,
 
-        "full_name":user.full_name,
+        "full_name": user.full_name,
 
-        "email":user.email,
+        "email": user.email,
 
-        "role":user.role
+        "role": user.role
 
     })
 
 
-def update_profile(user_id):
+def update_profile():
+
+    user_id = get_jwt_identity()
 
     user = User.query.get(user_id)
 
     if not user:
 
         return jsonify({
-
-            "message":"User not found"
-
-        }),404
+            "message": "User not found"
+        }), 404
 
     data = request.get_json()
 
@@ -51,21 +52,21 @@ def update_profile(user_id):
 
     return jsonify({
 
-        "message":"Profile Updated"
+        "message": "Profile Updated"
 
     })
 
-def change_password(user_id):
+def change_password():
+
+    user_id = get_jwt_identity()
 
     user = User.query.get(user_id)
 
     if not user:
 
         return jsonify({
-
             "message": "User not found"
-
-        }),404
+        }), 404
 
     data = request.get_json()
 
@@ -76,35 +77,24 @@ def change_password(user_id):
     if not current_password or not new_password:
 
         return jsonify({
-
-            "message":"All fields are required."
-
-        }),400
+            "message": "All fields are required."
+        }), 400
 
     if not check_password_hash(
-
         user.password,
-
         current_password
-
     ):
 
         return jsonify({
-
-            "message":"Current password is incorrect."
-
-        }),400
+            "message": "Current password is incorrect."
+        }), 400
 
     user.password = generate_password_hash(
-
         new_password
-
     )
 
     db.session.commit()
 
     return jsonify({
-
-        "message":"Password changed successfully."
-
-    }),200
+        "message": "Password changed successfully."
+    }), 200

@@ -59,9 +59,7 @@ export class FavoritesComponent implements OnInit {
     this.loading.set(true);
 
     this.service
-
-      .getFavorites(this.user.id)
-
+      .getFavorites()
       .subscribe({
 
         next: (res) => {

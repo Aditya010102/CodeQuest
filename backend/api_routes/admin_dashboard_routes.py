@@ -1,5 +1,7 @@
 from flask import Blueprint
 
+from decorators.admin_required import admin_required
+
 from controllers.admin_dashboard_controller import (
     admin_dashboard
 )
@@ -13,5 +15,5 @@ admin_dashboard_bp.route(
     "",
     methods=["GET"]
 )(
-    admin_dashboard
+    admin_required(admin_dashboard)
 )

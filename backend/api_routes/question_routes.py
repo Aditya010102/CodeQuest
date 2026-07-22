@@ -1,4 +1,7 @@
 from flask import Blueprint
+from flask_jwt_extended import jwt_required
+
+from decorators.admin_required import admin_required
 
 from controllers.question_controller import *
 
@@ -14,7 +17,9 @@ question_bp = Blueprint(
 question_bp.route(
     "/<int:subject_id>",
     methods=["GET"]
-)(get_questions_by_subject)
+)(
+    jwt_required()(get_questions_by_subject)
+)
 
 # -------------------------
 # Admin Panel
@@ -23,19 +28,27 @@ question_bp.route(
 question_bp.route(
     "",
     methods=["GET"]
-)(get_questions)
+)(
+    admin_required(get_questions)
+)
 
 question_bp.route(
     "/",
     methods=["POST"]
-)(create_question)
+)(
+    admin_required(create_question)
+)
 
 question_bp.route(
     "/<int:question_id>",
     methods=["PUT"]
-)(update_question)
+)(
+    admin_required(update_question)
+)
 
 question_bp.route(
     "/<int:question_id>",
     methods=["DELETE"]
-)(delete_question)
+)(
+    admin_required(delete_question)
+)

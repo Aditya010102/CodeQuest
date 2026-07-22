@@ -96,9 +96,9 @@ export class HistoryComponent implements OnInit {
 
       .getHistory(
 
-        this.user.id
 
-      )
+
+    )
 
       .subscribe({
 

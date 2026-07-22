@@ -67,7 +67,7 @@ export class ChangePasswordComponent {
     }
 
     this.profileService.changePassword(
-      this.user.id,
+
       {
         current_password: value.current_password,
         new_password: value.new_password

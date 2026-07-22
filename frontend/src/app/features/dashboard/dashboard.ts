@@ -71,26 +71,20 @@ export class DashboardComponent implements OnInit {
   loadDashboard() {
 
     this.dashboardService
-
-      .getDashboard(
-
-        this.user.id
-
-      )
-
+      .getDashboard()
       .subscribe({
 
         next: (response: any) => {
 
-          this.dashboardData.set(
-
-            response
-
-          );
+          this.dashboardData.set(response);
 
         },
 
-        error: console.error
+        error: (err) => {
+
+          console.error(err);
+
+        }
 
       });
 

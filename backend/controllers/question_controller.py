@@ -149,7 +149,7 @@ def get_questions_by_subject(subject_id):
 
                     "text": option.option_text,
 
-                    "is_correct": option.is_correct
+                    # "is_correct": option.is_correct
 
                 }
 
